@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: ERC20TokenHolders
+repository: https://github.com/jasonliudan/erc20-holders-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ReflectDao
+    network: '{{network}}'
+    source:
+      address: '{{ReflectDaoAddress}}'
+      abi: ReflectDao
+      startBlock: {{ReflectDaoStartBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - ReflectDao
+      abis:
+        - name: ReflectDao
+          file: ./abis/ReflectDao.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/ReflectDao.ts

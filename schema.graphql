@@ -1,0 +1,5 @@
+type Holder @entity{
+  id: ID!
+  address: String!
+  balance: BigInt!
+}

@@ -1,0 +1,24 @@
+{
+  "name": "example",
+  "version": "0.1.0",
+  "repository": "https://github.com/graphprotocol/example-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "auth": "graph auth https://api/thegraph.com/deploy/ 536486b841994181b82160e3d849a884",
+    "prep:mainnet": "mustache networks/mainnet.json subgraph.mainnet.yaml > subgraph.yaml && yarn codegen",
+    "deploy": "graph deploy --access-token ACCESS_TOKEN --verbosity --debug --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ jasonliudan/erc20-holders-subgraph"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.20.0",
+    "@graphprotocol/graph-ts": "^0.20.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "truffle": "^5.0.4",
+    "truffle-contract": "^4.0.5",
+    "truffle-hdwallet-provider": "^1.0.4"
+  }
+}
