@@ -1,6 +1,6 @@
 import { BigInt, Address } from '@graphprotocol/graph-ts'
 import { store } from "@graphprotocol/graph-ts/index"
-import { Card } from "../../generated/schema"
+import { Holder } from "../../generated/schema"
 
 
 export const ZERO_ADDRESS = Address.fromHexString("0x0000000000000000000000000000000000000000")
@@ -14,14 +14,12 @@ export const ONE = BigInt.fromI32(1);
 export function removeEmptyEntity(entityName: string, id: string): void {
     store.remove(entityName, id);
 }
-export function getCard(address: string, cardId: string): Card {
-    let card = Card.load(cardId)
-    if (card == null) {
-        card = new Card(ZERO.toString())
-        card.address = DEAD_ADDRESS.toHex()
-        card.cardId = ZERO.toI32()
-        card.minters = []
-        card.mintingEvents = []
+export function getHolder(address: Address): Holder {
+    let holder = Holder.load(address.toHexString())
+    if (holder == null) {
+        holder = new Holder(address.toHexString())
+        holder.address = address.toHex()
+        holder.balance = ZERO
     }
-    return card as Card;
+    return holder as Holder;
 }
